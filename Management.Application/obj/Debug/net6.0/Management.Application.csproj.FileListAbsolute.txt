@@ -1,0 +1,15 @@
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Application\bin\Debug\net6.0\Management.Application.deps.json
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Application\bin\Debug\net6.0\Management.Application.dll
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Application\bin\Debug\net6.0\Management.Application.pdb
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Application\bin\Debug\net6.0\Management.Domain.dll
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Application\bin\Debug\net6.0\Management.Domain.pdb
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Application\obj\Debug\net6.0\Management.Application.csproj.AssemblyReference.cache
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Application\obj\Debug\net6.0\Management.Application.GeneratedMSBuildEditorConfig.editorconfig
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Application\obj\Debug\net6.0\Management.Application.AssemblyInfoInputs.cache
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Application\obj\Debug\net6.0\Management.Application.AssemblyInfo.cs
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Application\obj\Debug\net6.0\Management.Application.csproj.CoreCompileInputs.cache
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Application\obj\Debug\net6.0\Management.Application.csproj.CopyComplete
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Application\obj\Debug\net6.0\Management.Application.dll
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Application\obj\Debug\net6.0\refint\Management.Application.dll
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Application\obj\Debug\net6.0\Management.Application.pdb
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Application\obj\Debug\net6.0\ref\Management.Application.dll

@@ -1,0 +1,17 @@
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Persistence\bin\Debug\net6.0\Management.Persistence.deps.json
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Persistence\bin\Debug\net6.0\Management.Persistence.dll
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Persistence\bin\Debug\net6.0\Management.Persistence.pdb
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Persistence\bin\Debug\net6.0\Management.Application.dll
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Persistence\bin\Debug\net6.0\Management.Domain.dll
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Persistence\bin\Debug\net6.0\Management.Application.pdb
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Persistence\bin\Debug\net6.0\Management.Domain.pdb
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Persistence\obj\Debug\net6.0\Management.Persistence.csproj.AssemblyReference.cache
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Persistence\obj\Debug\net6.0\Management.Persistence.GeneratedMSBuildEditorConfig.editorconfig
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Persistence\obj\Debug\net6.0\Management.Persistence.AssemblyInfoInputs.cache
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Persistence\obj\Debug\net6.0\Management.Persistence.AssemblyInfo.cs
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Persistence\obj\Debug\net6.0\Management.Persistence.csproj.CoreCompileInputs.cache
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Persistence\obj\Debug\net6.0\Management.Persistence.csproj.CopyComplete
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Persistence\obj\Debug\net6.0\Management.Persistence.dll
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Persistence\obj\Debug\net6.0\refint\Management.Persistence.dll
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Persistence\obj\Debug\net6.0\Management.Persistence.pdb
+D:\Innowise\Trainee\Clinic\Clinic.Backend\ServicesAPI\Management.Persistence\obj\Debug\net6.0\ref\Management.Persistence.dll
