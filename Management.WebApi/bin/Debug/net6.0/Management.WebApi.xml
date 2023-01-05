@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Management.WebApi</name>
+    </assembly>
+    <members>
+        <member name="M:Management.WebApi.Controllers.ServiceCategoriesController.GetAll">
+            <summary>
+            Gets the list of service categories
+            </summary>
+            <remarks>
+            GET-request for getting all service categories
+            </remarks>
+            <response code="200">Success</response>
+            <response code="204">No content (service cateries are absent)</response>
+            <returns>
+            List of service categories
+            </returns>
+        </member>
+        <member name="M:Management.WebApi.Controllers.ServiceCategoriesController.GetServiceCategory(System.Int32)">
+            <summary>
+            Gets service category by id
+            </summary>
+            <remarks>
+            GET-request for service category by id
+            </remarks>
+            <response code="200">Success</response>
+            <response code="400">Bad request (no service category with such id)</response>
+            <returns>
+            Service category with requested id 
+            </returns>
+            <param name="id">Service category id</param>
+        </member>
+        <member name="M:Management.WebApi.Controllers.ServiceCategoriesController.CreateServiceCategory(Management.Application.ServiceCategories.Commands.CommandTypes.CreateServiceCategoryCommand)">
+            <summary>
+            Creates service category
+            </summary>
+            <remarks>
+            POST-request for creating service category entity
+            </remarks>
+            <response code="201">Service category created</response>
+            <response code="400">Bad request</response>
+            <returns>
+            Created service category 
+            </returns>
+        </member>
+        <member name="M:Management.WebApi.Controllers.ServiceCategoriesController.UpdateServiceCategory(Management.Application.ServiceCategories.Commands.CommandTypes.UpdateServiceCategoryCommand)">
+            <summary>
+            Updates service category
+            </summary>
+            <remarks>
+            PUT-request for updating service category entity
+            </remarks>
+            <response code="200">Service category updated</response>
+            <response code="400">Bad request</response>
+            <returns>
+            Updated service category
+            </returns>
+        </member>
+        <member name="M:Management.WebApi.Controllers.ServiceCategoriesController.DeleteServiceCategory(System.Int32)">
+            <summary>
+            Deletes service category
+            </summary>
+            <remarks>
+            DELETE-request for updating service category entity
+            </remarks>
+            <response code="200">Service category deleted</response>
+            <response code="400">Service category not found</response>
+            <returns>
+            Deleted service category
+            </returns>
+        </member>
+        <member name="M:Management.WebApi.Controllers.ServicesController.GetAll">
+            <summary>
+            Gets the list of services
+            </summary>
+            <remarks>
+            GET-request for getting all services
+            </remarks>
+            <response code="200">Success</response>
+            <response code="204">No content (services are absent)</response>
+            <returns>
+            List of services
+            </returns>
+        </member>
+        <member name="M:Management.WebApi.Controllers.ServicesController.GetService(System.Int32)">
+            <summary>
+            Gets service by id
+            </summary>
+            <remarks>
+            GET-request for service by id
+            </remarks>
+            <response code="200">Success</response>
+            <response code="400">Bad request (no service with such id)</response>
+            <returns>
+            Service with requested id 
+            </returns>
+            <param name="id">Service id</param>
+        </member>
+        <member name="M:Management.WebApi.Controllers.ServicesController.CreateService(Management.Application.Services.Commands.CommandTypes.CreateServiceCommand)">
+            <summary>
+            Creates service
+            </summary>
+            <remarks>
+            POST-request for creating service entity
+            </remarks>
+            <response code="201">Service created</response>
+            <response code="400">Bad request</response>
+            <returns>
+            Created service 
+            </returns>
+        </member>
+        <member name="M:Management.WebApi.Controllers.ServicesController.UpdateService(Management.Application.Services.Commands.CommandTypes.UpdateServiceCommand)">
+            <summary>
+            Updates service
+            </summary>
+            <remarks>
+            PUT-request for updating service entity
+            </remarks>
+            <response code="200">Service updated</response>
+            <response code="400">Bad request</response>
+            <returns>
+            Updated service 
+            </returns>
+        </member>
+        <member name="M:Management.WebApi.Controllers.ServicesController.DeleteService(System.Int32)">
+            <summary>
+            Deletes service
+            </summary>
+            <remarks>
+            DELETE-request for updating service entity
+            </remarks>
+            <response code="200">Service deleted</response>
+            <response code="400">Service not found</response>
+            <returns>
+            Deleted
+            service 
+            </returns>
+        </member>
+        <member name="M:Management.WebApi.Controllers.SpecializationsController.GetAll">
+            <summary>
+            Gets the list of specializations
+            </summary>
+            <remarks>
+            GET-request for getting all specializations
+            </remarks>
+            <response code="200">Success</response>
+            <response code="204">No content (specializations are absent)</response>
+            <returns>
+            List of specializations
+            </returns>
+        </member>
+        <member name="M:Management.WebApi.Controllers.SpecializationsController.GetSpecialization(System.Int32)">
+            <summary>
+            Gets specialization by id
+            </summary>
+            <remarks>
+            GET-request for specialization by id
+            </remarks>
+            <response code="200">Success</response>
+            <response code="400">Bad request (no specialization with such id)</response>
+            <returns>
+            Specialization with requested id 
+            </returns>
+            <param name="id">Specialization id</param>
+        </member>
+        <member name="M:Management.WebApi.Controllers.SpecializationsController.CreateSpecialization(Management.Application.Specializations.Commands.CommandTypes.CreateSpecializationCommand)">
+            <summary>
+            Creates specialization
+            </summary>
+            <remarks>
+            POST-request for creating specialization entity
+            </remarks>
+            <response code="201">Specialization created</response>
+            <response code="400">Bad request</response>
+            <returns>
+            Created specialization 
+            </returns>
+        </member>
+        <member name="M:Management.WebApi.Controllers.SpecializationsController.UpdateSpecialization(Management.Application.Specializations.Commands.CommandTypes.UpdateSpecializationCommand)">
+            <summary>
+            Updates specialization
+            </summary>
+            <remarks>
+            PUT-request for updating specialization entity
+            </remarks>
+            <response code="200">Specialization updated</response>
+            <response code="400">Bad request</response>
+            <returns>
+            Updated specialization
+            </returns>
+        </member>
+        <member name="M:Management.WebApi.Controllers.SpecializationsController.DeleteSpecialization(System.Int32)">
+            <summary>
+            Deletes specialization
+            </summary>
+            <remarks>
+            DELETE-request for updating specialization entity
+            </remarks>
+            <response code="200">Specialization deleted</response>
+            <response code="400">Specialization not found</response>
+            <returns>
+            Deleted specialization
+            </returns>
+        </member>
+    </members>
+</doc>
