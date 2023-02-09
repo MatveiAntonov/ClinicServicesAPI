@@ -17,10 +17,12 @@ public class ServicesController : ControllerBase
 {
     private readonly IMediator _mediator;
     private readonly IMapper _mapper;
-    public ServicesController(IMediator mediator, IMapper mapper)
+    private readonly ILogger<ServicesController> _logger;
+    public ServicesController(IMediator mediator, IMapper mapper, ILogger<ServicesController> logger)
     {
         _mediator = mediator;
         _mapper = mapper;
+        _logger = logger;
     }
 
     /// <summary>
@@ -39,9 +41,10 @@ public class ServicesController : ControllerBase
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [Authorize]
     public async Task<ActionResult<IEnumerable<ServiceDto>>> GetAll()
     {
+        _logger.LogInformation("Fetching all service models from the storage");
+
         var services = await _mediator.Send(new GetAllServicesQuery());
         if (services is not null)
         {
@@ -54,6 +57,8 @@ public class ServicesController : ControllerBase
         }
         else
         {
+            _logger.LogInformation("Storage is empty");
+
             return NoContent();
         }
     }
@@ -76,6 +81,8 @@ public class ServicesController : ControllerBase
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public async Task<ActionResult<ServiceDto>> GetService(int id)
     {
+        _logger.LogInformation($"Fetching service model with id: {id} from the storage");
+        
         var query = new GetServiceQuery
         {
             ServiceId = id
@@ -88,6 +95,8 @@ public class ServicesController : ControllerBase
         } 
         else
         {
+            _logger.LogInformation($"No service with id: {id} in the storage");
+
             return BadRequest();
         }
     }
@@ -107,16 +116,24 @@ public class ServicesController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [Authorize(Roles = "Receptionist")]
     public async Task<ActionResult<ServiceDto>> CreateService([FromForm] CreateServiceCommand command)
     {
+        _logger.LogInformation($"Posting new service model to the storage");
+
+        if (command == null)
+            return BadRequest();
+
         var service = await _mediator.Send(command);
         if (service is not null)
         {
             var serviceReturn = _mapper.Map<ServiceDto>(service);
-            return Created($"/services/{service.ServiceId}", serviceReturn);
+            return Created($"/services/{serviceReturn.ServiceId}", serviceReturn);
         }
         else
         {
+            _logger.LogError($"Something went wrong while adding new service model to the storage");
+
             return BadRequest();
         }
     }
@@ -136,8 +153,14 @@ public class ServicesController : ControllerBase
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [Authorize(Roles = "Receptionist")]
     public async Task<ActionResult<ServiceDto>> UpdateService([FromForm] UpdateServiceCommand command)
     {
+        _logger.LogInformation($"Updating service model with id: {command.ServiceId} in the storage");
+
+        if (command == null)
+            return BadRequest();
+
         var service = await _mediator.Send(command);
         if (service is not null)
         {
@@ -166,8 +189,11 @@ public class ServicesController : ControllerBase
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [Authorize(Roles = "Receptionist")]
     public async Task<ActionResult<ServiceDto>> DeleteService(int id)
     {
+        _logger.LogInformation($"Deleting service model with id: {id} in the storage");
+
         var command = new DeleteServiceCommand
         {
             ServiceId = id
@@ -180,6 +206,8 @@ public class ServicesController : ControllerBase
         }
         else
         {
+            _logger.LogInformation($"There is no model with id: {id} in the storage for deleting");
+
             return BadRequest();
         }
     }

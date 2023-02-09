@@ -21,22 +21,13 @@ namespace Management.Persistence.Repositories {
                     .ToListAsync();
         }
 
-        public async Task<Service> GetService(int id, CancellationToken cancellationToken) {
-            var entity = await _managementDbContext.Services
+        public async Task<Service?> GetService(int id, CancellationToken cancellationToken) {
+            return await _managementDbContext.Services
                 .Include(service => service.ServiceCategory)
                 .Include(service => service.Specialization)
                 .FirstOrDefaultAsync(service => service.ServiceId == id);
-
-            if (entity == null || entity.ServiceId != id)
-            {
-                throw new NotFoundException(nameof(Service), id);
-            } 
-            else
-            {
-                return entity;
-            }
         }
-        public async Task<Service> CreateService(Service request, CancellationToken cancellationToken) 
+        public async Task<Service?> CreateService(Service request, CancellationToken cancellationToken) 
         {
             var category = _managementDbContext.ServiceCategories
                 .FirstOrDefault(category => category.ServiceCategoryId == request.ServiceCategoryId);
@@ -44,26 +35,18 @@ namespace Management.Persistence.Repositories {
             var specialization = _managementDbContext.Specializations
                 .FirstOrDefault(specialization => specialization.SpecializationId == request.SpecializationId);
 
+            request.Specialization = specialization;
+            request.ServiceCategory = category;
 
-            if (category is not null && specialization is not null)
-            {
-                request.ServiceCategory = category;
-                request.Specialization = specialization;
+            _managementDbContext.Services.Add(request);
+            await _managementDbContext.SaveChangesAsync(cancellationToken);
 
-                _managementDbContext.Services.Add(request);
-                await _managementDbContext.SaveChangesAsync(cancellationToken);
-
-                return _managementDbContext.Services
+            return await _managementDbContext.Services
                     .Include(service => service.ServiceCategory)
                     .Include(service => service.Specialization)
-                    .FirstOrDefault(service => service.ServiceId == request.ServiceId)!;
-            }
-            else
-            {
-                throw new Exception(); // Add Exception
-            }             
+                    .FirstOrDefaultAsync(service => service.ServiceId == request.ServiceId);
         }
-        public async Task<Service> UpdateService(Service request, CancellationToken cancellationToken) 
+        public async Task<Service?> UpdateService(Service request, CancellationToken cancellationToken) 
         {
             var entity = await _managementDbContext.Services
                 .Include(service => service.ServiceCategory)
@@ -76,38 +59,25 @@ namespace Management.Persistence.Repositories {
             var specialization = _managementDbContext.Specializations
                 .FirstOrDefault(specialization => specialization.SpecializationId == request.SpecializationId);
 
+            entity.ServiceCategoryId = request.ServiceCategoryId;
+            entity.SpecializationId = request.SpecializationId;
+            entity.ServiceCategory = request.ServiceCategory;
+            entity.Specialization = request.Specialization;
+            entity.ServicePrice = request.ServicePrice;
+            entity.ServiceName = request.ServiceName;
 
-            if (entity is null || entity.ServiceId != request.ServiceId || category is null || specialization is null)
-            {
-                throw new NotFoundException(nameof(Service), request.ServiceId);
-            } 
-            else
-            {
-                entity.ServiceCategoryId = request.ServiceCategoryId;
-                entity.SpecializationId = request.SpecializationId;
-                entity.ServiceCategory = request.ServiceCategory;
-                entity.Specialization = request.Specialization;
-                entity.ServiceName = request.ServiceName;
-                entity.ServicePrice = request.ServicePrice;
-
-                await _managementDbContext.SaveChangesAsync(cancellationToken);
-                return entity;
-            }
+            await _managementDbContext.SaveChangesAsync(cancellationToken);
+            return entity;
         }
 
-        public async Task<Service> DeleteService(int id, CancellationToken cancellationToken)
+        public async Task<Service?> DeleteService(int id, CancellationToken cancellationToken)
         {
             var entity = await _managementDbContext.Services
                 .FirstOrDefaultAsync(service => service.ServiceId == id, cancellationToken);
-            if (entity == null || entity.ServiceId != id)
-            {
-                throw new NotFoundException(nameof(Service), id);
-            }
-            else
-            {
-                _managementDbContext.Services.Remove(entity);
-                await _managementDbContext.SaveChangesAsync(cancellationToken);
-            }
+            
+            _managementDbContext.Services.Remove(entity);
+
+            await _managementDbContext.SaveChangesAsync(cancellationToken);
             return entity;
         }
     }

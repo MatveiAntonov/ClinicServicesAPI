@@ -6,8 +6,10 @@
 			=> services.AddAuthentication("Bearer")
 			.AddJwtBearer("Bearer", options =>
 			{
-				options.Authority = "https://localhost:5005";
+				//options.Authority = "http://localhost:6006";
+				options.Authority = "http://authorization-server:6006";
 				options.Audience = "serviceapi";
+				options.RequireHttpsMetadata= false;
 			});
 	}
 }

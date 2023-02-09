@@ -3,6 +3,7 @@ using Management.Application.ServiceCategories.Commands.CommandTypes;
 using Management.Application.ServiceCategories.Queries.QueriesTypes;
 using Management.WebApi.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Management.WebApi.Controllers;
@@ -104,6 +105,7 @@ public class ServiceCategoriesController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [Authorize(Roles = "Receptionist")]
     public async Task<ActionResult<ServiceCategoryDto>> CreateServiceCategory([FromForm] CreateServiceCategoryCommand command)
     {
         var category = await _mediator.Send(command);
@@ -133,6 +135,7 @@ public class ServiceCategoriesController : ControllerBase
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [Authorize(Roles = "Receptionist")]
     public async Task<ActionResult<ServiceCategoryDto>> UpdateServiceCategory([FromForm] UpdateServiceCategoryCommand command)
     {
         var category = await _mediator.Send(command);
@@ -162,6 +165,7 @@ public class ServiceCategoriesController : ControllerBase
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [Authorize(Roles = "Receptionist")]
     public async Task<ActionResult<ServiceCategoryDto>> DeleteServiceCategory(int id)
     {
         var command = new DeleteServiceCategoryCommand

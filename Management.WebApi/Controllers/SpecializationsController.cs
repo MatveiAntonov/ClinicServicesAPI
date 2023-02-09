@@ -3,7 +3,9 @@ using Management.Application.Specializations.Commands.CommandTypes;
 using Management.Application.Specializations.Queries.QueriesTypes;
 using Management.WebApi.Models;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 
 namespace Management.WebApi.Controllers;
@@ -103,6 +105,7 @@ public class SpecializationsController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [Authorize(Roles = "Receptionist")]
     public async Task<ActionResult<SpecializationDto>> CreateSpecialization([FromForm] CreateSpecializationCommand command)
     {
         var specialization = await _mediator.Send(command);
@@ -132,6 +135,7 @@ public class SpecializationsController : ControllerBase
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [Authorize(Roles = "Receptionist")]
     public async Task<ActionResult<SpecializationDto>> UpdateSpecialization([FromForm] UpdateSpecializationCommand command)
     {
         var specialization = await _mediator.Send(command);
@@ -161,6 +165,7 @@ public class SpecializationsController : ControllerBase
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [Authorize(Roles = "Receptionist")]
     public async Task<ActionResult<SpecializationDto>> DeleteSpecialization(int id)
     {
         var command = new DeleteSpecializationCommand

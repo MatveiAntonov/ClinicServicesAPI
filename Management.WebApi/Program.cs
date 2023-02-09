@@ -12,7 +12,6 @@ using System.Text.Json.Serialization;
 using Management.WebApi;
 
 var builder = WebApplication.CreateBuilder(args);
-
 builder.Services.AddDbContext<ManagementDbContext>(opts => {
     opts.UseSqlServer(builder.Configuration["ConnectionStrings:ManagementConnection"]);
 });
@@ -47,8 +46,8 @@ builder.Services.AddVersionedApiExplorer(options =>
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>,
     ConfigureSwaggerOptions>();
 
-
 builder.Services.ConfigureAuthenticationHandler();
+
 
 builder.Services.AddSwaggerGen();
 
@@ -60,7 +59,6 @@ builder.Services.AddApiVersioning(options =>
 
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-builder.Services.AddAuthentication();
 
 var app = builder.Build();
 
@@ -93,7 +91,7 @@ using (var scope = app.Services.CreateScope())
     } 
     catch (Exception exception)
     {
-
+        // EXCEPTION
     }
 }
 
@@ -107,6 +105,11 @@ app.UseApiVersioning();
 app.UseEndpoints(endpoints => 
 {
     endpoints.MapControllers();
+});
+
+app.Run(async (context) =>
+{
+    app.Logger.LogInformation($"Processing request {context.Request.Path}");
 });
 
 app.Run();
