@@ -10,6 +10,7 @@ using Management.WebApi.Middleware;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Text.Json.Serialization;
 using Management.WebApi;
+using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ManagementDbContext>(opts => {
@@ -41,6 +42,11 @@ builder.Services.AddCors(options =>
 builder.Services.AddVersionedApiExplorer(options =>
 {
     options.GroupNameFormat = "'v'VVV";
+});
+
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq();
 });
 
 builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>,
