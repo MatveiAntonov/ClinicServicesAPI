@@ -2,15 +2,21 @@
 using Management.Application.Common.Exceptions;
 using Management.Application.Interfaces;
 using Management.Domain.Entities;
+using Management.Domain.Interfaces.Shared;
+using MassTransit;
+using MediatR.Wrappers;
 using Microsoft.EntityFrameworkCore;
 
 namespace Management.Persistence.Repositories {
     public class ServiceRepository : IServiceRepository {
         private readonly ManagementDbContext _managementDbContext;
         private readonly IMapper _mapper;
-        public ServiceRepository(ManagementDbContext context, IMapper mapper) {
+        private readonly IPublishEndpoint _publishEndpoint;
+
+        public ServiceRepository(ManagementDbContext context, IMapper mapper, IPublishEndpoint publishEndpoint) {
             _managementDbContext = context;
             _mapper = mapper;
+            _publishEndpoint = publishEndpoint;
         }
 
         public async Task<IEnumerable<Service>> GetAllServices(CancellationToken cancellationToken) 
@@ -40,6 +46,15 @@ namespace Management.Persistence.Repositories {
 
             _managementDbContext.Services.Add(request);
             await _managementDbContext.SaveChangesAsync(cancellationToken);
+
+            await _publishEndpoint.Publish<ServiceCreated>(new 
+            {
+                ServiceCategoryName = request.ServiceCategory.ServiceCategoryName,
+                ServiceName = request.ServiceName,
+                ServicePrice = request.ServicePrice,
+                SpecializationName = request.Specialization.SpecializationName,
+                TimeSlotSize = request.ServiceCategory.TimeSlotSize
+            });
 
             return await _managementDbContext.Services
                     .Include(service => service.ServiceCategory)
