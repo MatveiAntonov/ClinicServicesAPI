@@ -2,7 +2,7 @@
 using Management.Application.Common.Exceptions;
 using Management.Application.Interfaces;
 using Management.Domain.Entities;
-using Management.Domain.Interfaces.Shared;
+using Events;
 using MassTransit;
 using MediatR.Wrappers;
 using Microsoft.EntityFrameworkCore;
@@ -49,6 +49,7 @@ namespace Management.Persistence.Repositories {
 
             await _publishEndpoint.Publish<ServiceCreated>(new 
             {
+                Id = request.ServiceId,
                 ServiceCategoryName = request.ServiceCategory.ServiceCategoryName,
                 ServiceName = request.ServiceName,
                 ServicePrice = request.ServicePrice,
@@ -82,6 +83,17 @@ namespace Management.Persistence.Repositories {
             entity.ServiceName = request.ServiceName;
 
             await _managementDbContext.SaveChangesAsync(cancellationToken);
+            
+            await _publishEndpoint.Publish<ServiceUpdated>(new
+            {
+                Id = entity.ServiceId,
+                ServiceCategoryName = entity.ServiceCategory.ServiceCategoryName,
+                ServiceName = entity.ServiceName,
+                ServicePrice = entity.ServicePrice,
+                SpecializationName = entity.Specialization.SpecializationName,
+                TimeSlotSize = entity.ServiceCategory.TimeSlotSize
+            });
+
             return entity;
         }
 
@@ -93,6 +105,17 @@ namespace Management.Persistence.Repositories {
             _managementDbContext.Services.Remove(entity);
 
             await _managementDbContext.SaveChangesAsync(cancellationToken);
+
+            await _publishEndpoint.Publish<ServiceDeleted>(new
+            {
+                Id = entity.ServiceId,
+                ServiceCategoryName = entity.ServiceCategory.ServiceCategoryName,
+                ServiceName = entity.ServiceName,
+                ServicePrice = entity.ServicePrice,
+                SpecializationName = entity.Specialization.SpecializationName,
+                TimeSlotSize = entity.ServiceCategory.TimeSlotSize
+            });
+
             return entity;
         }
     }
