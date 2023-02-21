@@ -116,7 +116,7 @@ public class ServicesController : ControllerBase
     [HttpPost]
     [ProducesResponseType(StatusCodes.Status201Created)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [Authorize(Roles = "Receptionist")]
+    //[Authorize(Roles = "Receptionist")]
     public async Task<ActionResult<ServiceDto>> CreateService([FromForm] CreateServiceCommand command)
     {
         _logger.LogInformation($"Posting new service model to the storage");
@@ -153,7 +153,7 @@ public class ServicesController : ControllerBase
     [HttpPut]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [Authorize(Roles = "Receptionist")]
+    //[Authorize(Roles = "Receptionist")]
     public async Task<ActionResult<ServiceDto>> UpdateService([FromForm] UpdateServiceCommand command)
     {
         _logger.LogInformation($"Updating service model with id: {command.ServiceId} in the storage");
@@ -189,7 +189,7 @@ public class ServicesController : ControllerBase
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
-    [Authorize(Roles = "Receptionist")]
+    //[Authorize(Roles = "Receptionist")]
     public async Task<ActionResult<ServiceDto>> DeleteService(int id)
     {
         _logger.LogInformation($"Deleting service model with id: {id} in the storage");
