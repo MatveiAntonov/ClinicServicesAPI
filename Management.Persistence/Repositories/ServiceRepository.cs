@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
-using Management.Application.Common.Exceptions;
 using Management.Application.Interfaces;
 using Management.Domain.Entities;
 using Events;
 using MassTransit;
-using MediatR.Wrappers;
 using Microsoft.EntityFrameworkCore;
 
 namespace Management.Persistence.Repositories {
@@ -47,7 +45,7 @@ namespace Management.Persistence.Repositories {
             _managementDbContext.Services.Add(request);
             await _managementDbContext.SaveChangesAsync(cancellationToken);
 
-            await _publishEndpoint.Publish<ServiceCreated>(new 
+            await _publishEndpoint.Publish<ServiceCreated>(new
             {
                 Id = request.ServiceId,
                 ServiceCategoryName = request.ServiceCategory.ServiceCategoryName,
